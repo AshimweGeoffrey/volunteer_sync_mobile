@@ -13,7 +13,14 @@ class SignupScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/logo.png', height: 100),
+            Text(
+              'Farmora',
+              style: TextStyle(
+                fontFamily: 'Abnes',
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             SizedBox(height: 20),
             TextField(
               decoration: InputDecoration(labelText: 'Email'),
