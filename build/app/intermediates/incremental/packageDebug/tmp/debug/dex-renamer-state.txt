@@ -1,4 +1,4 @@
-#Wed Feb 19 18:33:04 CAT 2025
+#Wed Feb 19 20:18:19 CAT 2025
 base.0=/home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 base.1=/home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/app/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
 base.2=/home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex

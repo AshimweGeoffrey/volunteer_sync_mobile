@@ -1,0 +1,18 @@
+<lint-module
+    format="1"
+    dir="/home/micro/Desktop/Repos-Git/Side_Projects/Farmora/android/app"
+    name=":app"
+    type="APP"
+    maven="android:app:"
+    agpVersion="8.1.0"
+    buildFolder="/home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/app"
+    bootClassPath="/home/micro/Android/Sdk/platforms/android-35/android.jar:/home/micro/Android/Sdk/build-tools/33.0.1/core-lambda-stubs.jar"
+    javaSourceLevel="1.8"
+    compileTarget="android-35">
+  <lintOptions
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="release"/>
+</lint-module>

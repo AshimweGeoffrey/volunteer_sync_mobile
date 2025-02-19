@@ -8,6 +8,7 @@ class GoogleSignInButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
+        minimumSize: Size(double.infinity, 50),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
