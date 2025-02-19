@@ -1,1 +1,0 @@
- /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/.dart_tool/flutter_build/79b956ee0b1d600afd312af0facb7fb7/native_assets.yaml: 
