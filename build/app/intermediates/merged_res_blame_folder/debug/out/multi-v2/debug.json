@@ -236,6 +236,25 @@
                     }
                 },
                 {
+                    "source": "/home/micro/Desktop/Repos-Git/Side_Projects/Farmora/ui/android/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "173,818",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "476,982"
+                    },
+                    "to": {
+                        "startLines": "192,196",
+                        "startColumns": "4,4",
+                        "startOffsets": "11691,11872",
+                        "endLines": "195,198",
+                        "endColumns": "12,12",
+                        "endOffsets": "11867,12036"
+                    }
+                },
+                {
                     "source": "/home/micro/.gradle/caches/transforms-3/12d0e8d71b0600cec5ba2edcf29e905c/transformed/lifecycle-runtime-2.7.0/res/values/values.xml",
                     "from": {
                         "startLines": "2",
@@ -269,25 +288,6 @@
                         "endLines": "63,64,65,66,67,68,69,70,169,170,171,172,173,174,175,176,178,179,180,181,182,183,184,185,186,353,372",
                         "endColumns": "89,79,89,89,79,80,79,79,104,180,124,106,179,122,115,102,187,104,180,124,174,147,62,61,78,20,20",
                         "endOffsets": "2398,2478,2568,2658,2738,2819,2899,2979,9104,9285,9410,9517,9697,9820,9936,10039,10394,10499,10680,10805,10980,11128,11191,11253,11332,17685,18102"
-                    }
-                },
-                {
-                    "source": "/home/micro/Desktop/Repos-Git/Side_Projects/Farmora/android/app/src/main/res/values/styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "173,818",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "476,982"
-                    },
-                    "to": {
-                        "startLines": "192,196",
-                        "startColumns": "4,4",
-                        "startOffsets": "11691,11872",
-                        "endLines": "195,198",
-                        "endColumns": "12,12",
-                        "endOffsets": "11867,12036"
                     }
                 }
             ]
@@ -4685,7 +4685,7 @@
             "outputFile": "com.example.famora.app-merged_res-29:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "/home/micro/Desktop/Repos-Git/Side_Projects/Farmora/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/home/micro/Desktop/Repos-Git/Side_Projects/Farmora/ui/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:farmora/screens/login_screen.dart';
 import 'package:farmora/screens/signup_screen.dart';
 import 'package:farmora/screens/welcome_screen.dart';
+import 'package:farmora/screens/dashboard_screen.dart';
+import 'package:farmora/screens/calculator_screen.dart';
 
 void main() {
   runApp(FarmoraApp());
@@ -13,7 +15,7 @@ class FarmoraApp extends StatelessWidget {
     return MaterialApp(
       title: 'Farmora',
       theme: ThemeData(
-        primaryColor: Color(0xFF1E88E5), // Light dark blue
+        primaryColor: Color(0xFF1E886), // Light dark blue
         colorScheme: ColorScheme.fromSwatch().copyWith(
           secondary: Color(0xFF1E88E5), // Light dark blue
         ),
@@ -32,6 +34,8 @@ class FarmoraApp extends StatelessWidget {
         '/': (context) => WelcomeScreen(),
         '/login': (context) => LoginScreen(),
         '/signup': (context) => SignupScreen(),
+        '/dashboard': (context) => DashboardScreen(),
+        '/calculator': (context) => CalculatorScreen(),
       },
     );
   }

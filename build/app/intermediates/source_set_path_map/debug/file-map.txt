@@ -28,6 +28,10 @@ com.example.famora.app-resValues-26 /home/micro/Desktop/Repos-Git/Side_Projects/
 com.example.famora.app-packageDebugResources-27 /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/app/intermediates/incremental/debug/packageDebugResources/merged.dir
 com.example.famora.app-packageDebugResources-28 /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/app/intermediates/incremental/debug/packageDebugResources/stripped.dir
 com.example.famora.app-merged_res-29 /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/app/intermediates/merged_res/debug
-com.example.famora.app-packaged_res-30 /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/firebase_auth/intermediates/packaged_res/debug
-com.example.famora.app-packaged_res-31 /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/firebase_core/intermediates/packaged_res/debug
-com.example.famora.app-packaged_res-32 /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/google_sign_in_android/intermediates/packaged_res/debug
+com.example.famora.app-packaged_res-30 /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/battery_plus/intermediates/packaged_res/debug
+com.example.famora.app-packaged_res-31 /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/cloud_firestore/intermediates/packaged_res/debug
+com.example.famora.app-packaged_res-32 /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/connectivity_plus/intermediates/packaged_res/debug
+com.example.famora.app-packaged_res-33 /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/firebase_auth/intermediates/packaged_res/debug
+com.example.famora.app-packaged_res-34 /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/firebase_core/intermediates/packaged_res/debug
+com.example.famora.app-packaged_res-35 /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/flutter_blue_plus_android/intermediates/packaged_res/debug
+com.example.famora.app-packaged_res-36 /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/google_sign_in_android/intermediates/packaged_res/debug

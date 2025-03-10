@@ -49,7 +49,9 @@ class LoginScreen extends StatelessWidget {
                         foregroundColor: Colors.white,
                         minimumSize: Size(double.infinity, 50),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/dashboard');
+                      },
                       child: Text('Login'),
                     ),
                     SizedBox(height: 10), // Add space between buttons

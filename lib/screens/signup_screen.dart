@@ -13,7 +13,7 @@ class SignupScreen extends StatelessWidget {
             children: [
               SizedBox(height: 50),
               Text(
-                'Farmora',
+                'APX',
                 style: TextStyle(
                   fontFamily: 'Abnes',
                   fontSize: 24, // Reduced font size

@@ -12,7 +12,7 @@ class WelcomeScreen extends StatelessWidget {
             children: [
               SizedBox(height: 50),
               Text(
-                'Farmora',
+                'APX',
                 style: TextStyle(
                   fontFamily: 'Abnes',
                   fontSize: 24,
@@ -103,3 +103,4 @@ class PlantPainter extends CustomPainter {
     return false;
   }
 }
+

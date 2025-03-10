@@ -1,0 +1,545 @@
+import 'package:flutter/material.dart';
+import 'package:farmora/screens/calculator_screen.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:battery_plus/battery_plus.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'dart:async';
+
+class DashboardScreen extends StatefulWidget {
+  @override
+  _DashboardScreenState createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  int _selectedIndex = 0;
+  final Battery _battery = Battery();
+  int _batteryLevel = 0;
+  BatteryState _batteryState = BatteryState.full;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  ConnectivityResult _connectionStatus = ConnectivityResult.none;
+  bool _isBluetoothOn = false;
+  bool _isScanning = false;
+  List<ScanResult> _bluetoothDevices = [];
+  StreamSubscription<List<ScanResult>>? _scanResultsSubscription;
+  StreamSubscription<BluetoothAdapterState>? _adapterStateSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    _initConnectivity();
+    _initBatteryMonitoring();
+    _initBluetoothMonitoring();
+  }
+
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    _scanResultsSubscription?.cancel();
+    _adapterStateSubscription?.cancel();
+    FlutterBluePlus.stopScan();
+    super.dispose();
+  }
+
+  // Initialize connectivity monitoring
+  Future<void> _initConnectivity() async {
+    late ConnectivityResult result;
+    try {
+      result = await Connectivity().checkConnectivity();
+    } catch (e) {
+      debugPrint('Failed to get connectivity status: $e');
+      return;
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _connectionStatus = result;
+    });
+
+    _connectivitySubscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      if (!mounted) return;
+      setState(() {
+        _connectionStatus = result;
+      });
+    });
+  }
+
+  // Initialize battery monitoring
+  Future<void> _initBatteryMonitoring() async {
+    try {
+      final batteryLevel = await _battery.batteryLevel;
+      final batteryState = await _battery.batteryState;
+      
+      if (!mounted) return;
+
+      setState(() {
+        _batteryLevel = batteryLevel;
+        _batteryState = batteryState;
+      });
+
+      _battery.onBatteryStateChanged.listen((BatteryState state) {
+        if (!mounted) return;
+        setState(() {
+          _batteryState = state;
+        });
+        _updateBatteryLevel();
+      });
+
+      // Set up periodic battery level updates
+      Timer.periodic(Duration(minutes: 1), (_) => _updateBatteryLevel());
+    } catch (e) {
+      debugPrint('Battery monitoring error: $e');
+    }
+  }
+
+  Future<void> _updateBatteryLevel() async {
+    try {
+      final batteryLevel = await _battery.batteryLevel;
+      if (!mounted) return;
+      setState(() {
+        _batteryLevel = batteryLevel;
+      });
+    } catch (e) {
+      debugPrint('Battery level update error: $e');
+    }
+  }
+
+  // Initialize Bluetooth monitoring
+  Future<void> _initBluetoothMonitoring() async {
+    // Initialize adapter state monitoring
+    _adapterStateSubscription = FlutterBluePlus.adapterState.listen((state) {
+      if (!mounted) return;
+      setState(() {
+        _isBluetoothOn = state == BluetoothAdapterState.on;
+        // If Bluetooth was just turned on and we're not already scanning, start a scan
+        if (_isBluetoothOn && !_isScanning) {
+          _startBluetoothScan();
+        }
+      });
+    });
+
+    try {
+      // Check initial Bluetooth state
+      final adapterState = await FlutterBluePlus.adapterState.first;
+      setState(() {
+        _isBluetoothOn = adapterState == BluetoothAdapterState.on;
+      });
+
+      // Start scanning if Bluetooth is on
+      if (_isBluetoothOn) {
+        _startBluetoothScan();
+      }
+    } catch (e) {
+      debugPrint('Bluetooth initialization error: $e');
+    }
+  }
+
+  // Start Bluetooth scan
+  Future<void> _startBluetoothScan() async {
+    if (_isScanning) {
+      return;
+    }
+
+    setState(() {
+      _isScanning = true;
+      _bluetoothDevices = [];
+    });
+
+    // Cancel previous subscription if exists
+    await _scanResultsSubscription?.cancel();
+
+    // Listen to scan results
+    _scanResultsSubscription = FlutterBluePlus.scanResults.listen(
+      (results) {
+        if (!mounted) return;
+        setState(() {
+          _bluetoothDevices = results;
+        });
+      },
+      onError: (e) {
+        debugPrint('Scan error: $e');
+        setState(() {
+          _isScanning = false;
+        });
+      },
+      onDone: () {
+        setState(() {
+          _isScanning = false;
+        });
+      },
+    );
+
+    try {
+      // Start the scan with a timeout
+      await FlutterBluePlus.startScan(timeout: Duration(seconds: 10));
+    } catch (e) {
+      debugPrint('Start scan error: $e');
+      setState(() {
+        _isScanning = false;
+      });
+    }
+  }
+
+  // Toggle Bluetooth on/off
+  Future<void> _toggleBluetooth() async {
+    try {
+      if (_isBluetoothOn) {
+        // Android cannot programmatically disable Bluetooth, we can only prompt the user
+        await FlutterBluePlus.turnOff();
+      } else {
+        await FlutterBluePlus.turnOn();
+      }
+    } catch (e) {
+      debugPrint('Toggle Bluetooth error: $e');
+    }
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  // Network connectivity status card
+  Widget _buildNetworkStatusCard() {
+    IconData icon;
+    String status;
+    Color color;
+
+    switch (_connectionStatus) {
+      case ConnectivityResult.wifi:
+        icon = Icons.wifi;
+        status = 'Wi-Fi Connected';
+        color = Colors.green;
+        break;
+      case ConnectivityResult.mobile:
+        icon = Icons.signal_cellular_alt;
+        status = 'Mobile Data Connected';
+        color = Colors.green;
+        break;
+      case ConnectivityResult.ethernet:
+        icon = Icons.settings_ethernet;
+        status = 'Ethernet Connected';
+        color = Colors.green;
+        break;
+      case ConnectivityResult.bluetooth:
+        icon = Icons.bluetooth;
+        status = 'Connected via Bluetooth';
+        color = Colors.green;
+        break;
+      case ConnectivityResult.none:
+      default:
+        icon = Icons.signal_wifi_off;
+        status = 'No Internet Connection';
+        color = Colors.red;
+        break;
+    }
+
+    return _buildStatusCard(
+      title: 'Network Status',
+      icon: icon,
+      content: status,
+      color: color,
+      onTap: _initConnectivity,
+    );
+  }
+
+  // Battery status card
+  Widget _buildBatteryStatusCard() {
+    IconData icon;
+    String status;
+    Color color;
+
+    // Determine battery icon and color based on level and state
+    if (_batteryLevel >= 80) {
+      icon = Icons.battery_full;
+      color = Colors.green;
+    } else if (_batteryLevel >= 50) {
+      icon = Icons.battery_6_bar;
+      color = Colors.green;
+    } else if (_batteryLevel >= 15) {
+      icon = Icons.battery_3_bar;
+      color = Colors.orange;
+    } else {
+      icon = Icons.battery_alert;
+      color = Colors.red;
+    }
+
+    // Handle charging state
+    if (_batteryState == BatteryState.charging) {
+      icon = Icons.battery_charging_full;
+      status = 'Charging - $_batteryLevel%';
+      color = Colors.blue;
+    } else {
+      status = 'Battery - $_batteryLevel%';
+    }
+
+    return _buildStatusCard(
+      title: 'Battery Status',
+      icon: icon,
+      content: status,
+      color: color,
+      onTap: _updateBatteryLevel,
+      showProgress: false,
+      extraWidget: LinearProgressIndicator(
+        value: _batteryLevel / 100,
+        backgroundColor: Colors.grey[300],
+        valueColor: AlwaysStoppedAnimation<Color>(color),
+      ),
+    );
+  }
+
+  // Bluetooth status card
+  Widget _buildBluetoothStatusCard() {
+    IconData icon;
+    String status;
+    Color color;
+
+    if (_isScanning) {
+      icon = Icons.bluetooth_searching;
+      status = 'Scanning for devices...';
+      color = Colors.blue;
+    } else if (_isBluetoothOn) {
+      icon = Icons.bluetooth_connected;
+      status = 'Bluetooth On';
+      color = Colors.blue;
+    } else {
+      icon = Icons.bluetooth_disabled;
+      status = 'Bluetooth Off';
+      color = Colors.grey;
+    }
+
+    return _buildStatusCard(
+      title: 'Bluetooth Status',
+      icon: icon,
+      content: status,
+      color: color,
+      onTap: _isScanning ? () {} : (_isBluetoothOn ? _startBluetoothScan : _toggleBluetooth),
+      showProgress: _isScanning,
+      extraWidget: _isBluetoothOn && _bluetoothDevices.isNotEmpty
+          ? Container(
+              height: _bluetoothDevices.length > 3 ? 150 : 80,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: _bluetoothDevices.length > 3 ? 3 : _bluetoothDevices.length,
+                itemBuilder: (context, index) {
+                  final device = _bluetoothDevices[index].device;
+                  return ListTile(
+                    dense: true,
+                    title: Text(device.platformName.isNotEmpty 
+                        ? device.platformName 
+                        : device.remoteId.str.substring(0, 8)),
+                    subtitle: Text('Signal: ${_bluetoothDevices[index].rssi} dBm'),
+                    leading: Icon(_bluetoothDevices[index].advertisementData.connectable 
+                        ? Icons.bluetooth_connected 
+                        : Icons.bluetooth,
+                        size: 18,
+                        color: _bluetoothDevices[index].advertisementData.connectable 
+                            ? Colors.blue 
+                            : Colors.grey),
+                  );
+                },
+              ),
+            )
+          : null,
+    );
+  }
+
+  // Generic status card builder
+  Widget _buildStatusCard({
+    required String title,
+    required IconData icon,
+    required String content,
+    required Color color,
+    required VoidCallback onTap,
+    bool showProgress = false,
+    Widget? extraWidget,
+  }) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: onTap,
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Icon(Icons.refresh, size: 18),
+                ],
+              ),
+              SizedBox(height: 12),
+              Row(
+                children: [
+                  Icon(icon, color: color, size: 24),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      content,
+                      style: TextStyle(fontSize: 14, color: color),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  if (showProgress) 
+                    SizedBox(
+                      height: 16,
+                      width: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                ],
+              ),
+              if (extraWidget != null) ...[
+                SizedBox(height: 8),
+                extraWidget,
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Home screen content
+  Widget _buildHomeContent() {
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'System Status',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 16),
+          _buildNetworkStatusCard(),
+          SizedBox(height: 12),
+          _buildBatteryStatusCard(),
+          SizedBox(height: 12),
+          _buildBluetoothStatusCard(),
+          SizedBox(height: 24),
+          Text(
+            'Dashboard Content',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 16),
+          // Additional dashboard content would go here
+          Card(
+            elevation: 4,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Center(
+                child: Text('Your dashboard content'),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Dashboard'),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text('User Name'),
+              accountEmail: Text('user@example.com'),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage('assets/profile_photo.png'),
+              ),
+              decoration: BoxDecoration(
+                color: Color(0xFF1E88E5),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.calculate),
+              title: Text('Calculator'),
+              onTap: () {
+                Navigator.pushNamed(context, '/calculator');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About Us'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.verified_user),
+              title: Text('Version 1.0.0'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+      body: _selectedIndex == 0
+          ? _buildHomeContent()
+          : _selectedIndex == 1
+              ? CalculatorScreen()
+              : Center(child: Text('Economics Page')),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calculate),
+            label: 'Calculator',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.show_chart),
+            label: 'Economics',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Color(0xFF1E88E5),
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}
