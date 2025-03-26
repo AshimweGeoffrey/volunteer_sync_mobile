@@ -12,15 +12,15 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  // Custom color palette
-  static final Color _primaryColor = Color(0xFF6200EE); // Purple
-  static final Color _secondaryColor = Color(0xFF03DAC6); // Teal
-  static final Color _accentColor = Color(0xFFFFA000); // Amber
-  static final Color _errorColor = Color(0xFFB00020); // Dark red
-  static final Color _successColor = Color(0xFF4CAF50); // Green
-  static final Color _warningColor = Color(0xFFFF9800); // Orange
-  static final Color _infoColor = Color(0xFF2196F3); // Blue
-  static final Color _neutralColor = Color(0xFF757575); // Gray
+  // Modern color palette
+  static final Color _primaryColor = Color(0xFF1E88E5); // Light blue
+  static final Color _secondaryColor = Color(0xFF26A69A); // Teal
+  static final Color _accentColor = Color(0xFF42A5F5); // Lighter blue
+  static final Color _errorColor = Color(0xFFE53935); // Red
+  static final Color _successColor = Color(0xFF43A047); // Green
+  static final Color _warningColor = Color(0xFFFFA000); // Amber
+  static final Color _infoColor = Color(0xFF29B6F6); // Light blue
+  static final Color _neutralColor = Color(0xFF78909C); // Blue-grey
 
   int _selectedIndex = 0;
   final Battery _battery = Battery();
@@ -296,7 +296,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       showProgress: false,
       extraWidget: LinearProgressIndicator(
         value: _batteryLevel / 100,
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Colors.grey[200],
         valueColor: AlwaysStoppedAnimation<Color>(color),
       ),
     );
@@ -346,11 +346,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       device.platformName.isNotEmpty
                           ? device.platformName
                           : device.remoteId.str.substring(0, 8),
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black87),
                     ),
                     subtitle: Text(
                       'Signal: ${_bluetoothDevices[index].rssi} dBm',
-                      style: TextStyle(color: Colors.white70),
+                      style: TextStyle(color: Colors.black54),
                     ),
                     leading: Icon(
                         _bluetoothDevices[index].advertisementData.connectable
@@ -381,15 +381,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Widget? extraWidget,
   }) {
     return Card(
-      elevation: 6,
+      elevation: 3,
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      color: Color(0xFF1E1E1E), // Dark card background
+      color: Colors.white,
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: onTap,
         child: Padding(
-          padding: EdgeInsets.all(24), // Enlarged padding
+          padding: EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -400,23 +400,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     title,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18, // Larger font
-                      color: Colors.white,
+                      fontSize: 18,
+                      color: Colors.black87,
                     ),
                   ),
                   Icon(Icons.refresh, size: 20, color: _accentColor),
                 ],
               ),
-              SizedBox(height: 16), // More space
+              SizedBox(height: 16),
               Row(
                 children: [
-                  Icon(icon, color: color, size: 32), // Larger icon
-                  SizedBox(width: 16), // More space
+                  Icon(icon, color: color, size: 32),
+                  SizedBox(width: 16),
                   Expanded(
                     child: Text(
                       content,
-                      style:
-                          TextStyle(fontSize: 16, color: color), // Larger font
+                      style: TextStyle(fontSize: 16, color: color),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -432,7 +431,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ],
               ),
               if (extraWidget != null) ...[
-                SizedBox(height: 12), // More space
+                SizedBox(height: 12),
                 extraWidget,
               ],
             ],
@@ -445,10 +444,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
   // Products card for quick access
   Widget _buildProductsCard() {
     return Card(
-      elevation: 6,
+      elevation: 3,
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      color: Color(0xFF1E1E1E),
+      color: Colors.white,
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: () {
@@ -458,7 +457,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           );
         },
         child: Padding(
-          padding: EdgeInsets.all(24),
+          padding: EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -470,7 +469,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      color: Colors.white,
+                      color: Colors.black87,
                     ),
                   ),
                   Icon(Icons.shopping_cart, size: 20, color: _secondaryColor),
@@ -484,7 +483,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   Expanded(
                     child: Text(
                       'Manage your product inventory',
-                      style: TextStyle(fontSize: 16, color: Colors.white70),
+                      style: TextStyle(fontSize: 16, color: Colors.black54),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -501,41 +500,41 @@ class _DashboardScreenState extends State<DashboardScreen> {
   // Home screen content
   Widget _buildHomeContent() {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(20), // Larger padding
+      padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'System Status',
             style: TextStyle(
-              fontSize: 24, // Larger font
+              fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Colors.black87,
             ),
           ),
-          SizedBox(height: 20), // More space
+          SizedBox(height: 20),
           _buildNetworkStatusCard(),
-          SizedBox(height: 16), // More space
+          SizedBox(height: 16),
           _buildBatteryStatusCard(),
-          SizedBox(height: 16), // More space
+          SizedBox(height: 16),
           _buildBluetoothStatusCard(),
-          SizedBox(height: 28), // More space
+          SizedBox(height: 28),
           Text(
             'Dashboard Content',
             style: TextStyle(
-              fontSize: 24, // Larger font
+              fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Colors.black87,
             ),
           ),
-          SizedBox(height: 20), // More space
+          SizedBox(height: 20),
           _buildProductsCard(),
           SizedBox(height: 16),
           // Additional dashboard content
           Card(
-            elevation: 6,
+            elevation: 3,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            color: Color(0xFF1E1E1E), // Dark card background
+            color: Colors.white,
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -545,7 +544,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               },
               borderRadius: BorderRadius.circular(16),
               child: Container(
-                padding: EdgeInsets.all(24), // Enlarged padding
+                padding: EdgeInsets.all(20),
                 child: Row(
                   children: [
                     Icon(
@@ -561,7 +560,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           Text(
                             'Product Management',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black87,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -570,7 +569,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           Text(
                             'Add, edit, and manage your products',
                             style: TextStyle(
-                              color: Colors.white70,
+                              color: Colors.black54,
                               fontSize: 14,
                             ),
                           ),
@@ -595,10 +594,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Black background
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text('Dashboard'),
         backgroundColor: _primaryColor,
+        elevation: 0,
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
@@ -612,7 +612,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       drawer: Drawer(
         child: Container(
-          color: Colors.black, // Black drawer background
+          color: Colors.white,
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
@@ -633,14 +633,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               ListTile(
                 leading: Icon(Icons.home, color: _primaryColor),
-                title: Text('Home', style: TextStyle(color: Colors.white)),
+                title: Text('Home', style: TextStyle(color: Colors.black87)),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
                 leading: Icon(Icons.shopping_cart, color: _secondaryColor),
-                title: Text('Products', style: TextStyle(color: Colors.white)),
+                title: Text('Products', style: TextStyle(color: Colors.black87)),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(
@@ -651,14 +651,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               ListTile(
                 leading: Icon(Icons.calculate, color: _accentColor),
-                title: Text('Calculator', style: TextStyle(color: Colors.white)),
+                title: Text('Calculator', style: TextStyle(color: Colors.black87)),
                 onTap: () {
                   Navigator.pushNamed(context, '/calculator');
                 },
               ),
               ListTile(
                 leading: Icon(Icons.info, color: _secondaryColor),
-                title: Text('About Us', style: TextStyle(color: Colors.white)),
+                title: Text('About Us', style: TextStyle(color: Colors.black87)),
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -666,7 +666,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ListTile(
                 leading: Icon(Icons.verified_user, color: _infoColor),
                 title: Text('Version 1.0.0',
-                    style: TextStyle(color: Colors.white)),
+                    style: TextStyle(color: Colors.black87)),
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -681,7 +681,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ? CalculatorScreen()
               : Center(
                   child: Text('Economics Page',
-                      style: TextStyle(color: Colors.white, fontSize: 18))),
+                      style: TextStyle(color: Colors.black87, fontSize: 18))),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -700,7 +700,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         currentIndex: _selectedIndex,
         selectedItemColor: _primaryColor,
         unselectedItemColor: _neutralColor,
-        backgroundColor: Colors.black, // Black bottom nav bar
+        backgroundColor: Colors.white,
         onTap: _onItemTapped,
       ),
       floatingActionButton: FloatingActionButton(

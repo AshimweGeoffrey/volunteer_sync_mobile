@@ -126,132 +126,172 @@
 83-->[com.google.firebase:firebase-common:20.4.3] /home/micro/.gradle/caches/transforms-3/6cc871ff166acfac68302d822b4e6e01/transformed/jetified-firebase-common-20.4.3/AndroidManifest.xml:37:17-82
 84        </service>
 85
-86        <activity
-86-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:23:9-27:75
-87            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
-87-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:24:13-93
-88            android:excludeFromRecents="true"
-88-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:25:13-46
+86        <provider
+86-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:9-17:20
+87            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+87-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-82
+88            android:authorities="com.example.famora.flutter.image_provider"
+88-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
 89            android:exported="false"
-89-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:26:13-37
-90            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-90-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:27:13-72
-91        <!--
-92            Service handling Google Sign-In user revocation. For apps that do not integrate with
-93            Google Sign-In, this service will never be started.
-94        -->
+89-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-37
+90            android:grantUriPermissions="true" >
+90-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-47
+91            <meta-data
+91-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-16:75
+92                android:name="android.support.FILE_PROVIDER_PATHS"
+92-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:17-67
+93                android:resource="@xml/flutter_image_picker_file_paths" />
+93-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-72
+94        </provider> <!-- Trigger Google Play services to install the backported photo picker module. -->
 95        <service
-95-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:33:9-37:51
-96            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
-96-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:34:13-89
-97            android:exported="true"
-97-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:35:13-36
-98            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
-98-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:36:13-107
-99            android:visibleToInstantApps="true" />
-99-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:37:13-48
-100
-101        <activity
-101-->[com.google.android.gms:play-services-base:18.0.1] /home/micro/.gradle/caches/transforms-3/990bd840ae842bdd30fc346ade6cd011/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
-102            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-102-->[com.google.android.gms:play-services-base:18.0.1] /home/micro/.gradle/caches/transforms-3/990bd840ae842bdd30fc346ade6cd011/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
-103            android:exported="false"
-103-->[com.google.android.gms:play-services-base:18.0.1] /home/micro/.gradle/caches/transforms-3/990bd840ae842bdd30fc346ade6cd011/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
-104            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-104-->[com.google.android.gms:play-services-base:18.0.1] /home/micro/.gradle/caches/transforms-3/990bd840ae842bdd30fc346ade6cd011/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
-105
-106        <provider
-106-->[com.google.firebase:firebase-common:20.4.3] /home/micro/.gradle/caches/transforms-3/6cc871ff166acfac68302d822b4e6e01/transformed/jetified-firebase-common-20.4.3/AndroidManifest.xml:23:9-28:39
-107            android:name="com.google.firebase.provider.FirebaseInitProvider"
-107-->[com.google.firebase:firebase-common:20.4.3] /home/micro/.gradle/caches/transforms-3/6cc871ff166acfac68302d822b4e6e01/transformed/jetified-firebase-common-20.4.3/AndroidManifest.xml:24:13-77
-108            android:authorities="com.example.famora.firebaseinitprovider"
-108-->[com.google.firebase:firebase-common:20.4.3] /home/micro/.gradle/caches/transforms-3/6cc871ff166acfac68302d822b4e6e01/transformed/jetified-firebase-common-20.4.3/AndroidManifest.xml:25:13-72
-109            android:directBootAware="true"
-109-->[com.google.firebase:firebase-common:20.4.3] /home/micro/.gradle/caches/transforms-3/6cc871ff166acfac68302d822b4e6e01/transformed/jetified-firebase-common-20.4.3/AndroidManifest.xml:26:13-43
-110            android:exported="false"
-110-->[com.google.firebase:firebase-common:20.4.3] /home/micro/.gradle/caches/transforms-3/6cc871ff166acfac68302d822b4e6e01/transformed/jetified-firebase-common-20.4.3/AndroidManifest.xml:27:13-37
-111            android:initOrder="100" />
-111-->[com.google.firebase:firebase-common:20.4.3] /home/micro/.gradle/caches/transforms-3/6cc871ff166acfac68302d822b4e6e01/transformed/jetified-firebase-common-20.4.3/AndroidManifest.xml:28:13-36
-112
-113        <uses-library
-113-->[androidx.window:window:1.2.0] /home/micro/.gradle/caches/transforms-3/8859fd2468ade3ef2655d1f63d6737f2/transformed/jetified-window-1.2.0/AndroidManifest.xml:23:9-25:40
-114            android:name="androidx.window.extensions"
-114-->[androidx.window:window:1.2.0] /home/micro/.gradle/caches/transforms-3/8859fd2468ade3ef2655d1f63d6737f2/transformed/jetified-window-1.2.0/AndroidManifest.xml:24:13-54
-115            android:required="false" />
-115-->[androidx.window:window:1.2.0] /home/micro/.gradle/caches/transforms-3/8859fd2468ade3ef2655d1f63d6737f2/transformed/jetified-window-1.2.0/AndroidManifest.xml:25:13-37
-116        <uses-library
-116-->[androidx.window:window:1.2.0] /home/micro/.gradle/caches/transforms-3/8859fd2468ade3ef2655d1f63d6737f2/transformed/jetified-window-1.2.0/AndroidManifest.xml:26:9-28:40
-117            android:name="androidx.window.sidecar"
-117-->[androidx.window:window:1.2.0] /home/micro/.gradle/caches/transforms-3/8859fd2468ade3ef2655d1f63d6737f2/transformed/jetified-window-1.2.0/AndroidManifest.xml:27:13-51
-118            android:required="false" />
-118-->[androidx.window:window:1.2.0] /home/micro/.gradle/caches/transforms-3/8859fd2468ade3ef2655d1f63d6737f2/transformed/jetified-window-1.2.0/AndroidManifest.xml:28:13-37
-119
-120        <meta-data
-120-->[com.google.android.gms:play-services-basement:18.3.0] /home/micro/.gradle/caches/transforms-3/aa568bf11239b6a9b2866fb2d7c8f9fe/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:21:9-23:69
-121            android:name="com.google.android.gms.version"
-121-->[com.google.android.gms:play-services-basement:18.3.0] /home/micro/.gradle/caches/transforms-3/aa568bf11239b6a9b2866fb2d7c8f9fe/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:22:13-58
-122            android:value="@integer/google_play_services_version" />
-122-->[com.google.android.gms:play-services-basement:18.3.0] /home/micro/.gradle/caches/transforms-3/aa568bf11239b6a9b2866fb2d7c8f9fe/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:23:13-66
-123
-124        <provider
-124-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:24:9-32:20
-125            android:name="androidx.startup.InitializationProvider"
-125-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:25:13-67
-126            android:authorities="com.example.famora.androidx-startup"
-126-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:26:13-68
-127            android:exported="false" >
-127-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:27:13-37
-128            <meta-data
-128-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:29:13-31:52
-129                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-129-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
-130                android:value="androidx.startup" />
-130-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
-131            <meta-data
-131-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
-132                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-132-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
-133                android:value="androidx.startup" />
-133-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
-134        </provider>
-135
-136        <receiver
-136-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
-137            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-137-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
-138            android:directBootAware="false"
-138-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
-139            android:enabled="true"
-139-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
-140            android:exported="true"
-140-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
-141            android:permission="android.permission.DUMP" >
-141-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
-142            <intent-filter>
-142-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
-143                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-143-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
-143-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
-144            </intent-filter>
-145            <intent-filter>
-145-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
-146                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-146-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
-146-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
-147            </intent-filter>
-148            <intent-filter>
-148-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
-149                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-149-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
-149-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
-150            </intent-filter>
-151            <intent-filter>
-151-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
-152                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-152-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
-152-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
-153            </intent-filter>
-154        </receiver>
-155    </application>
-156
-157</manifest>
+95-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:19:9-31:19
+96            android:name="com.google.android.gms.metadata.ModuleDependencies"
+96-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-78
+97            android:enabled="false"
+97-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-36
+98            android:exported="false" >
+98-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-37
+99            <intent-filter>
+99-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-26:29
+100                <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
+100-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:25:17-94
+100-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:25:25-91
+101            </intent-filter>
+102
+103            <meta-data
+103-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-30:36
+104                android:name="photopicker_activity:0:required"
+104-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:29:17-63
+105                android:value="" />
+105-->[:image_picker_android] /home/micro/Desktop/Repos-Git/Side_Projects/Farmora/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:30:17-33
+106        </service>
+107
+108        <activity
+108-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:23:9-27:75
+109            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+109-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:24:13-93
+110            android:excludeFromRecents="true"
+110-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:25:13-46
+111            android:exported="false"
+111-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:26:13-37
+112            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+112-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:27:13-72
+113        <!--
+114            Service handling Google Sign-In user revocation. For apps that do not integrate with
+115            Google Sign-In, this service will never be started.
+116        -->
+117        <service
+117-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:33:9-37:51
+118            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+118-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:34:13-89
+119            android:exported="true"
+119-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:35:13-36
+120            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+120-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:36:13-107
+121            android:visibleToInstantApps="true" />
+121-->[com.google.android.gms:play-services-auth:21.0.0] /home/micro/.gradle/caches/transforms-3/3c72559058e33b68bad65d8760eb3610/transformed/jetified-play-services-auth-21.0.0/AndroidManifest.xml:37:13-48
+122
+123        <activity
+123-->[com.google.android.gms:play-services-base:18.0.1] /home/micro/.gradle/caches/transforms-3/990bd840ae842bdd30fc346ade6cd011/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+124            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+124-->[com.google.android.gms:play-services-base:18.0.1] /home/micro/.gradle/caches/transforms-3/990bd840ae842bdd30fc346ade6cd011/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+125            android:exported="false"
+125-->[com.google.android.gms:play-services-base:18.0.1] /home/micro/.gradle/caches/transforms-3/990bd840ae842bdd30fc346ade6cd011/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+126            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+126-->[com.google.android.gms:play-services-base:18.0.1] /home/micro/.gradle/caches/transforms-3/990bd840ae842bdd30fc346ade6cd011/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+127
+128        <provider
+128-->[com.google.firebase:firebase-common:20.4.3] /home/micro/.gradle/caches/transforms-3/6cc871ff166acfac68302d822b4e6e01/transformed/jetified-firebase-common-20.4.3/AndroidManifest.xml:23:9-28:39
+129            android:name="com.google.firebase.provider.FirebaseInitProvider"
+129-->[com.google.firebase:firebase-common:20.4.3] /home/micro/.gradle/caches/transforms-3/6cc871ff166acfac68302d822b4e6e01/transformed/jetified-firebase-common-20.4.3/AndroidManifest.xml:24:13-77
+130            android:authorities="com.example.famora.firebaseinitprovider"
+130-->[com.google.firebase:firebase-common:20.4.3] /home/micro/.gradle/caches/transforms-3/6cc871ff166acfac68302d822b4e6e01/transformed/jetified-firebase-common-20.4.3/AndroidManifest.xml:25:13-72
+131            android:directBootAware="true"
+131-->[com.google.firebase:firebase-common:20.4.3] /home/micro/.gradle/caches/transforms-3/6cc871ff166acfac68302d822b4e6e01/transformed/jetified-firebase-common-20.4.3/AndroidManifest.xml:26:13-43
+132            android:exported="false"
+132-->[com.google.firebase:firebase-common:20.4.3] /home/micro/.gradle/caches/transforms-3/6cc871ff166acfac68302d822b4e6e01/transformed/jetified-firebase-common-20.4.3/AndroidManifest.xml:27:13-37
+133            android:initOrder="100" />
+133-->[com.google.firebase:firebase-common:20.4.3] /home/micro/.gradle/caches/transforms-3/6cc871ff166acfac68302d822b4e6e01/transformed/jetified-firebase-common-20.4.3/AndroidManifest.xml:28:13-36
+134
+135        <uses-library
+135-->[androidx.window:window:1.2.0] /home/micro/.gradle/caches/transforms-3/8859fd2468ade3ef2655d1f63d6737f2/transformed/jetified-window-1.2.0/AndroidManifest.xml:23:9-25:40
+136            android:name="androidx.window.extensions"
+136-->[androidx.window:window:1.2.0] /home/micro/.gradle/caches/transforms-3/8859fd2468ade3ef2655d1f63d6737f2/transformed/jetified-window-1.2.0/AndroidManifest.xml:24:13-54
+137            android:required="false" />
+137-->[androidx.window:window:1.2.0] /home/micro/.gradle/caches/transforms-3/8859fd2468ade3ef2655d1f63d6737f2/transformed/jetified-window-1.2.0/AndroidManifest.xml:25:13-37
+138        <uses-library
+138-->[androidx.window:window:1.2.0] /home/micro/.gradle/caches/transforms-3/8859fd2468ade3ef2655d1f63d6737f2/transformed/jetified-window-1.2.0/AndroidManifest.xml:26:9-28:40
+139            android:name="androidx.window.sidecar"
+139-->[androidx.window:window:1.2.0] /home/micro/.gradle/caches/transforms-3/8859fd2468ade3ef2655d1f63d6737f2/transformed/jetified-window-1.2.0/AndroidManifest.xml:27:13-51
+140            android:required="false" />
+140-->[androidx.window:window:1.2.0] /home/micro/.gradle/caches/transforms-3/8859fd2468ade3ef2655d1f63d6737f2/transformed/jetified-window-1.2.0/AndroidManifest.xml:28:13-37
+141
+142        <meta-data
+142-->[com.google.android.gms:play-services-basement:18.3.0] /home/micro/.gradle/caches/transforms-3/aa568bf11239b6a9b2866fb2d7c8f9fe/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:21:9-23:69
+143            android:name="com.google.android.gms.version"
+143-->[com.google.android.gms:play-services-basement:18.3.0] /home/micro/.gradle/caches/transforms-3/aa568bf11239b6a9b2866fb2d7c8f9fe/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:22:13-58
+144            android:value="@integer/google_play_services_version" />
+144-->[com.google.android.gms:play-services-basement:18.3.0] /home/micro/.gradle/caches/transforms-3/aa568bf11239b6a9b2866fb2d7c8f9fe/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:23:13-66
+145
+146        <provider
+146-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:24:9-32:20
+147            android:name="androidx.startup.InitializationProvider"
+147-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:25:13-67
+148            android:authorities="com.example.famora.androidx-startup"
+148-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:26:13-68
+149            android:exported="false" >
+149-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:27:13-37
+150            <meta-data
+150-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:29:13-31:52
+151                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+151-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
+152                android:value="androidx.startup" />
+152-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/micro/.gradle/caches/transforms-3/40a1bd5ff2ce65cd1fad055cc690d356/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
+153            <meta-data
+153-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+154                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+154-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+155                android:value="androidx.startup" />
+155-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+156        </provider>
+157
+158        <receiver
+158-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+159            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+159-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+160            android:directBootAware="false"
+160-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+161            android:enabled="true"
+161-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+162            android:exported="true"
+162-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+163            android:permission="android.permission.DUMP" >
+163-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+164            <intent-filter>
+164-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+165                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+165-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+165-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+166            </intent-filter>
+167            <intent-filter>
+167-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+168                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+168-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+168-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+169            </intent-filter>
+170            <intent-filter>
+170-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+171                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+171-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+171-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+172            </intent-filter>
+173            <intent-filter>
+173-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+174                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+174-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+174-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/micro/.gradle/caches/transforms-3/408a642162969e960684d9c16b2f116a/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+175            </intent-filter>
+176        </receiver>
+177    </application>
+178
+179</manifest>

@@ -5,6 +5,7 @@ import 'package:farmora/services/database_helper.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:farmora/screens/product_detail_screen.dart';
 import 'package:farmora/screens/product_form_screen.dart';
+import 'package:intl/intl.dart';
 
 class ProductListScreen extends StatefulWidget {
   @override
@@ -15,6 +16,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
   final DatabaseHelper _databaseHelper = DatabaseHelper();
   List<Product> _products = [];
   bool _isLoading = true;
+  final Color _primaryColor = Color(0xFF1E88E5);
+  final Color _accentColor = Color(0xFF26A69A);
   
   @override
   void initState() {
@@ -46,10 +49,11 @@ class _ProductListScreenState extends State<ProductListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text('Products'),
-        backgroundColor: Color(0xFF6200EE),
+        backgroundColor: _primaryColor,
+        elevation: 0,
         actions: [
           IconButton(
             icon: Icon(Icons.refresh),
@@ -70,10 +74,23 @@ class _ProductListScreenState extends State<ProductListScreen> {
         ],
       ),
       body: _isLoading 
-          ? Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator(color: _primaryColor))
           : _products.isEmpty
               ? _buildEmptyState()
               : _buildProductList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final result = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ProductFormScreen()),
+          );
+          if (result == true) {
+            _refreshProducts();
+          }
+        },
+        backgroundColor: _primaryColor,
+        child: Icon(Icons.add),
+      ),
     );
   }
 
@@ -85,12 +102,12 @@ class _ProductListScreenState extends State<ProductListScreen> {
           Icon(
             Icons.inventory_2_outlined,
             size: 80,
-            color: Color(0xFF6200EE).withOpacity(0.5),
+            color: _primaryColor.withOpacity(0.5),
           ),
           SizedBox(height: 16),
           Text(
             'No products available',
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: TextStyle(color: Colors.black87, fontSize: 18),
           ),
           SizedBox(height: 16),
           ElevatedButton.icon(
@@ -106,7 +123,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
             icon: Icon(Icons.add),
             label: Text('Add Product'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF6200EE),
+              backgroundColor: _primaryColor,
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -121,6 +138,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Widget _buildProductList() {
     return ListView.builder(
       itemCount: _products.length,
+      padding: EdgeInsets.all(12),
       itemBuilder: (context, index) {
         final product = _products[index];
         return Slidable(
@@ -140,7 +158,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                     _refreshProducts();
                   }
                 },
-                backgroundColor: Color(0xFF03DAC6),
+                backgroundColor: _accentColor,
                 foregroundColor: Colors.white,
                 icon: Icons.edit,
                 label: 'Edit',
@@ -154,7 +172,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 onPressed: (context) {
                   _showDeleteConfirmationDialog(product);
                 },
-                backgroundColor: Color(0xFFB00020),
+                backgroundColor: Colors.redAccent,
                 foregroundColor: Colors.white,
                 icon: Icons.delete,
                 label: 'Delete',
@@ -162,12 +180,12 @@ class _ProductListScreenState extends State<ProductListScreen> {
             ],
           ),
           child: Card(
-            elevation: 4,
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            elevation: 2,
+            margin: EdgeInsets.symmetric(vertical: 8),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            color: Color(0xFF1E1E1E),
+            color: Colors.white,
             child: InkWell(
               onTap: () async {
                 final result = await Navigator.push(
@@ -184,77 +202,122 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 _showFullSizeImage(context, product.imageUrl);
               },
               borderRadius: BorderRadius.circular(16),
-              child: Padding(
-                padding: EdgeInsets.all(12),
-                child: Row(
-                  children: [
-                    // Product image
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: GestureDetector(
-                        onTap: () {
-                          _showFullSizeImage(context, product.imageUrl);
-                        },
-                        child: Hero(
-                          tag: 'product-image-${product.id}',
-                          child: Container(
-                            width: 80,
-                            height: 80,
-                            child: product.imageUrl.startsWith('http')
-                                ? Image.network(
-                                    product.imageUrl,
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) => 
-                                        Icon(Icons.image_not_supported, color: Colors.grey),
-                                  )
-                                : Image.file(
-                                    File(product.imageUrl),
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) => 
-                                        Icon(Icons.image_not_supported, color: Colors.grey),
-                                  ),
-                          ),
+              child: Column(
+                children: [
+                  // Product image
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16),
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        _showFullSizeImage(context, product.imageUrl);
+                      },
+                      child: Hero(
+                        tag: 'product-image-${product.id}',
+                        child: Container(
+                          width: double.infinity,
+                          height: 180,
+                          child: product.imageUrl.startsWith('http')
+                              ? Image.network(
+                                  product.imageUrl,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) => 
+                                      Container(
+                                        color: Colors.grey[200],
+                                        child: Icon(Icons.image_not_supported, size: 40, color: Colors.grey),
+                                      ),
+                                )
+                              : Image.file(
+                                  File(product.imageUrl),
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) => 
+                                      Container(
+                                        color: Colors.grey[200],
+                                        child: Icon(Icons.image_not_supported, size: 40, color: Colors.grey),
+                                      ),
+                                ),
                         ),
                       ),
                     ),
-                    SizedBox(width: 16),
-                    // Product details
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            product.name,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                  ),
+                  // Product details
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                product.name,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            product.description.length > 60
-                                ? '${product.description.substring(0, 60)}...'
-                                : product.description,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white70,
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                              decoration: BoxDecoration(
+                                color: _accentColor,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                '\$${product.price.toStringAsFixed(2)}',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
+                          ],
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          product.description.length > 80
+                              ? '${product.description.substring(0, 80)}...'
+                              : product.description,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
                           ),
-                          SizedBox(height: 8),
-                          Text(
-                            '\$${product.price.toStringAsFixed(2)}',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF03DAC6),
+                        ),
+                        SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              DateFormat('MMM d, yyyy').format(product.createdAt),
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
+                            Row(
+                              children: [
+                                Icon(Icons.edit, size: 16, color: _accentColor),
+                                SizedBox(width: 4),
+                                Text(
+                                  'Swipe to edit',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: _accentColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -267,9 +330,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.black87,
           appBar: AppBar(
-            backgroundColor: Colors.black,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
             iconTheme: IconThemeData(color: Colors.white),
           ),
           body: Center(
@@ -282,12 +346,12 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   ? Image.network(
                       imageUrl,
                       errorBuilder: (context, error, stackTrace) => 
-                          Icon(Icons.image_not_supported, size: 100, color: Colors.grey),
+                          Icon(Icons.image_not_supported, size: 100, color: Colors.white),
                     )
                   : Image.file(
                       File(imageUrl),
                       errorBuilder: (context, error, stackTrace) => 
-                          Icon(Icons.image_not_supported, size: 100, color: Colors.grey),
+                          Icon(Icons.image_not_supported, size: 100, color: Colors.white),
                     ),
             ),
           ),
@@ -301,21 +365,22 @@ class _ProductListScreenState extends State<ProductListScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Color(0xFF1E1E1E),
-          title: Text('Delete Product', style: TextStyle(color: Colors.white)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: Text('Delete Product'),
           content: Text(
             'Are you sure you want to delete ${product.name}?',
-            style: TextStyle(color: Colors.white70),
           ),
           actions: [
             TextButton(
-              child: Text('Cancel', style: TextStyle(color: Color(0xFF03DAC6))),
+              child: Text('Cancel', style: TextStyle(color: Colors.grey[700])),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Delete', style: TextStyle(color: Color(0xFFB00020))),
+              child: Text('Delete', style: TextStyle(color: Colors.redAccent)),
               onPressed: () async {
                 Navigator.of(context).pop();
                 try {
@@ -324,7 +389,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('${product.name} deleted'),
-                      backgroundColor: Color(0xFFB00020),
+                      backgroundColor: Colors.redAccent,
                     ),
                   );
                 } catch (e) {
