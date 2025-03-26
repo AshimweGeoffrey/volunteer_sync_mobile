@@ -6,6 +6,7 @@ import 'package:farmora/screens/product_detail_screen.dart';
 import 'package:farmora/screens/product_form_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:farmora/screens/product_detail_screen.dart';
 
 class ProductListScreen extends StatefulWidget {
   @override
@@ -268,7 +269,7 @@ class _ProductListScreenState extends State<ProductListScreen> with AutomaticKee
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ProductDetailScreen(productId: product.id!),
+builder: (context) => ProductDetailScreen(product: product),
               ),
             );
           },
