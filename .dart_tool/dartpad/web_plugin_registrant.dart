@@ -9,7 +9,6 @@
 import 'package:battery_plus/src/battery_plus_web.dart';
 import 'package:cloud_firestore_web/cloud_firestore_web.dart';
 import 'package:connectivity_plus/src/connectivity_plus_web.dart';
-import 'package:firebase_auth_web/firebase_auth_web.dart';
 import 'package:firebase_core_web/firebase_core_web.dart';
 import 'package:flutter_blue_plus_web/flutter_blue_plus_web.dart';
 import 'package:google_sign_in_web/google_sign_in_web.dart';
@@ -20,7 +19,6 @@ void registerPlugins([final Registrar? pluginRegistrar]) {
   BatteryPlusWebPlugin.registerWith(registrar);
   FirebaseFirestoreWeb.registerWith(registrar);
   ConnectivityPlusWebPlugin.registerWith(registrar);
-  FirebaseAuthWeb.registerWith(registrar);
   FirebaseCoreWeb.registerWith(registrar);
   FlutterBluePlusWeb.registerWith(registrar);
   GoogleSignInPlugin.registerWith(registrar);

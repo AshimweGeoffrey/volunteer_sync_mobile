@@ -110,24 +110,6 @@
       "languageVersion": "3.3"
     },
     {
-      "name": "firebase_auth",
-      "rootUri": "file:///home/micro/.pub-cache/hosted/pub.dev/firebase_auth-4.16.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "firebase_auth_platform_interface",
-      "rootUri": "file:///home/micro/.pub-cache/hosted/pub.dev/firebase_auth_platform_interface-7.3.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.2"
-    },
-    {
-      "name": "firebase_auth_web",
-      "rootUri": "file:///home/micro/.pub-cache/hosted/pub.dev/firebase_auth_web-5.8.13",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
       "name": "firebase_core",
       "rootUri": "file:///home/micro/.pub-cache/hosted/pub.dev/firebase_core-2.32.0",
       "packageUri": "lib/",
@@ -228,12 +210,6 @@
       "rootUri": "file:///home/micro/.pub-cache/hosted/pub.dev/google_sign_in_web-0.10.2+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
-    },
-    {
-      "name": "http_parser",
-      "rootUri": "file:///home/micro/.pub-cache/hosted/pub.dev/http_parser-4.1.2",
-      "packageUri": "lib/",
-      "languageVersion": "3.4"
     },
     {
       "name": "js",
@@ -350,12 +326,6 @@
       "languageVersion": "3.4"
     },
     {
-      "name": "typed_data",
-      "rootUri": "file:///home/micro/.pub-cache/hosted/pub.dev/typed_data-1.4.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.5"
-    },
-    {
       "name": "upower",
       "rootUri": "file:///home/micro/.pub-cache/hosted/pub.dev/upower-0.7.0",
       "packageUri": "lib/",
@@ -392,7 +362,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2025-03-10T19:57:07.052449Z",
+  "generated": "2025-03-26T15:58:09.930991Z",
   "generator": "pub",
   "generatorVersion": "3.6.1",
   "flutterRoot": "file:///opt/flutter",
