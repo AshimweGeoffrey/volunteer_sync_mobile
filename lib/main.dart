@@ -4,6 +4,8 @@ import 'package:farmora/screens/signup_screen.dart';
 import 'package:farmora/screens/welcome_screen.dart';
 import 'package:farmora/screens/dashboard_screen.dart';
 import 'package:farmora/screens/calculator_screen.dart';
+import 'package:farmora/screens/product_list_screen.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(FarmoraApp());
@@ -36,6 +38,7 @@ class FarmoraApp extends StatelessWidget {
         '/signup': (context) => SignupScreen(),
         '/dashboard': (context) => DashboardScreen(),
         '/calculator': (context) => CalculatorScreen(),
+        '/products': (context) => ProductListScreen(),
       },
     );
   }

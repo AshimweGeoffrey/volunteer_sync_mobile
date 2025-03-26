@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'dart:async';
+import 'package:farmora/screens/product_list_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -441,6 +442,62 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
+  // Products card for quick access
+  Widget _buildProductsCard() {
+    return Card(
+      elevation: 6,
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      color: Color(0xFF1E1E1E),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ProductListScreen()),
+          );
+        },
+        child: Padding(
+          padding: EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Products',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Icon(Icons.shopping_cart, size: 20, color: _secondaryColor),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  Icon(Icons.inventory_2, color: _secondaryColor, size: 32),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: Text(
+                      'Manage your product inventory',
+                      style: TextStyle(fontSize: 16, color: Colors.white70),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Icon(Icons.arrow_forward, color: _accentColor),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   // Home screen content
   Widget _buildHomeContent() {
     return SingleChildScrollView(
@@ -472,18 +529,60 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
           ),
           SizedBox(height: 20), // More space
-          // Additional dashboard content would go here
+          _buildProductsCard(),
+          SizedBox(height: 16),
+          // Additional dashboard content
           Card(
             elevation: 6,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             color: Color(0xFF1E1E1E), // Dark card background
-            child: Container(
-              padding: EdgeInsets.all(24), // Enlarged padding
-              child: Center(
-                child: Text(
-                  'Your dashboard content',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProductListScreen()),
+                );
+              },
+              borderRadius: BorderRadius.circular(16),
+              child: Container(
+                padding: EdgeInsets.all(24), // Enlarged padding
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.shopping_cart,
+                      color: _secondaryColor,
+                      size: 40,
+                    ),
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Product Management',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            'Add, edit, and manage your products',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: _accentColor,
+                      size: 16,
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -540,9 +639,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 },
               ),
               ListTile(
+                leading: Icon(Icons.shopping_cart, color: _secondaryColor),
+                title: Text('Products', style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProductListScreen()),
+                  );
+                },
+              ),
+              ListTile(
                 leading: Icon(Icons.calculate, color: _accentColor),
-                title:
-                    Text('Calculator', style: TextStyle(color: Colors.white)),
+                title: Text('Calculator', style: TextStyle(color: Colors.white)),
                 onTap: () {
                   Navigator.pushNamed(context, '/calculator');
                 },
@@ -593,6 +702,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
         unselectedItemColor: _neutralColor,
         backgroundColor: Colors.black, // Black bottom nav bar
         onTap: _onItemTapped,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context, 
+            MaterialPageRoute(builder: (context) => ProductListScreen())
+          );
+        },
+        backgroundColor: _primaryColor,
+        child: Icon(Icons.add_shopping_cart),
+        tooltip: 'Manage Products',
       ),
     );
   }
