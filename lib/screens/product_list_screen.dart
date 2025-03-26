@@ -6,7 +6,7 @@ import 'package:farmora/screens/product_detail_screen.dart';
 import 'package:farmora/screens/product_form_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:farmora/screens/product_detail_screen.dart';
+
 
 class ProductListScreen extends StatefulWidget {
   @override
