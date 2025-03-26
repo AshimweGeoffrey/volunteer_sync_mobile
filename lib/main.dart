@@ -1,44 +1,67 @@
 import 'package:flutter/material.dart';
-import 'package:farmora/screens/login_screen.dart';
-import 'package:farmora/screens/signup_screen.dart';
-import 'package:farmora/screens/welcome_screen.dart';
-import 'package:farmora/screens/dashboard_screen.dart';
-import 'package:farmora/screens/calculator_screen.dart';
+import 'package:flutter/services.dart';
 import 'package:farmora/screens/product_list_screen.dart';
+import 'package:flutter/foundation.dart';
 
-void main() {
-  runApp(FarmoraApp());
+void main() async {
+  // Ensure Flutter bindings are initialized
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Set preferred orientations for better performance
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  
+  // Enable memory optimizations for release mode
+  if (kReleaseMode) {
+    debugPrint = (String? message, {int? wrapWidth}) {}; // Disable debug prints
+    PaintingBinding.instance.imageCache.maximumSize = 100; // Limit image cache size
+  }
+  
+  // Set system UI overlay style for better appearance
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarColor: Colors.white,
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ),
+  );
+  
+  runApp(MyApp());
 }
 
-class FarmoraApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Farmora',
       theme: ThemeData(
-        primaryColor: Color(0xFF1E886), // Light dark blue
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          secondary: Color(0xFF1E88E5), // Light dark blue
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        brightness: Brightness.light,
+        fontFamily: 'Roboto',
+        appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle.light,
+          color: Color(0xFF1E88E5),
+          elevation: 0,
         ),
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: Color(0xFFE3F2FD), // Light blue background
-          border: OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          hintStyle: TextStyle(color: Colors.grey),
+        cardTheme: CardTheme(
+          clipBehavior: Clip.antiAlias,
+          elevation: 2,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+        textTheme: TextTheme(
+          // Pre-define text styles for consistency and performance
+          titleLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          bodyLarge: TextStyle(fontSize: 16),
+          bodyMedium: TextStyle(fontSize: 14),
+          labelMedium: TextStyle(fontSize: 12, color: Colors.grey[600]),
         ),
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => WelcomeScreen(),
-        '/login': (context) => LoginScreen(),
-        '/signup': (context) => SignupScreen(),
-        '/dashboard': (context) => DashboardScreen(),
-        '/calculator': (context) => CalculatorScreen(),
-        '/products': (context) => ProductListScreen(),
-      },
+      debugShowCheckedModeBanner: false,
+      home: ProductListScreen(),
     );
   }
 }
