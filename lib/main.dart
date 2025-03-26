@@ -5,7 +5,6 @@ import 'package:farmora/screens/welcome_screen.dart';
 import 'package:farmora/screens/dashboard_screen.dart';
 import 'package:farmora/screens/calculator_screen.dart';
 import 'package:farmora/screens/product_list_screen.dart';
-import 'package:intl/intl.dart';
 
 void main() {
   runApp(FarmoraApp());

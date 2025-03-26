@@ -356,6 +356,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "intl",
+      "rootUri": "file:///home/micro/.pub-cache/hosted/pub.dev/intl-0.18.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "js",
       "rootUri": "file:///home/micro/.pub-cache/hosted/pub.dev/js-0.6.7",
       "packageUri": "lib/",
@@ -620,7 +626,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2025-03-26T16:56:11.887348Z",
+  "generated": "2025-03-26T17:06:44.641704Z",
   "generator": "pub",
   "generatorVersion": "3.6.1",
   "flutterRoot": "file:///opt/flutter",
