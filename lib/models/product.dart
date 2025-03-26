@@ -1,10 +1,10 @@
 class Product {
-  int? id;
-  String name;
-  String description;
-  double price;
-  String imageUrl;
-  DateTime createdAt;
+  final int? id;
+  final String name;
+  final String description;
+  final double price;
+  final String imageUrl;
+  final DateTime createdAt;
 
   Product({
     this.id,
@@ -15,7 +15,6 @@ class Product {
     required this.createdAt,
   });
 
-  // Convert product to map for database operations
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -27,19 +26,17 @@ class Product {
     };
   }
 
-  // Create product from map
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
-      id: map['id'],
-      name: map['name'],
-      description: map['description'],
-      price: map['price'],
-      imageUrl: map['imageUrl'],
-      createdAt: DateTime.parse(map['createdAt']),
+      id: map['id'] as int?,
+      name: map['name'] as String,
+      description: map['description'] as String,
+      price: double.parse(map['price'].toString()),
+      imageUrl: map['imageUrl'] as String,
+      createdAt: DateTime.parse(map['createdAt'] as String),
     );
   }
 
-  // Create a copy of the product with updated fields
   Product copyWith({
     int? id,
     String? name,

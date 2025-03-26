@@ -5,20 +5,14 @@ import 'package:farmora/models/product.dart';
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
   static Database? _database;
-  bool _initialDataLoaded = false;
 
   factory DatabaseHelper() => _instance;
 
   DatabaseHelper._internal();
 
   Future<Database> get database async {
-    _database ??= await _initDatabase();
-    
-    if (!_initialDataLoaded) {
-      await _loadInitialData();
-      _initialDataLoaded = true;
-    }
-    
+    if (_database != null) return _database!;
+    _database = await _initDatabase();
     return _database!;
   }
 
@@ -28,6 +22,9 @@ class DatabaseHelper {
       path,
       version: 1,
       onCreate: _onCreate,
+      onOpen: (db) async {
+        await _insertDummyData(db);
+      },
     );
   }
 
@@ -44,53 +41,89 @@ class DatabaseHelper {
     ''');
   }
 
-  Future<void> _loadInitialData() async {
-    List<Product> products = await getProducts();
-    if (products.isEmpty) {
-      List<Product> dummyProducts = [
-        Product(
-          name: 'Organic Tomatoes',
-          description: 'Fresh organic tomatoes grown without pesticides. Perfect for salads and cooking.',
-          price: 3.99,
-          imageUrl: 'https://images.unsplash.com/photo-1524593166156-312f362cada0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dG9tYXRvZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-          createdAt: DateTime.now().subtract(Duration(days: 3)),
-        ),
-        Product(
-          name: 'Fresh Carrots Bundle',
-          description: 'A bundle of fresh farm carrots. Rich in vitamins and perfect for juicing or cooking.',
-          price: 2.49,
-          imageUrl: 'https://images.unsplash.com/photo-1598170845058-32b9f8a4d5be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2Fycm90c3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-          createdAt: DateTime.now().subtract(Duration(days: 5)),
-        ),
-        Product(
-          name: 'Avocado Set',
-          description: 'Premium avocados ready to eat. High in healthy fats and perfect for sandwiches and salads.',
-          price: 5.99,
-          imageUrl: 'https://images.unsplash.com/photo-1519162808019-7de1683fa2ad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YXZvY2Fkb3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-          createdAt: DateTime.now().subtract(Duration(days: 2)),
-        ),
-        Product(
-          name: 'Farm Fresh Eggs',
-          description: 'Free-range eggs from our local farm. Ethically sourced and perfect for breakfast.',
-          price: 4.50,
-          imageUrl: 'https://images.unsplash.com/photo-1506976785307-8732e854ad03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZWdnc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-          createdAt: DateTime.now().subtract(Duration(days: 1)),
-        ),
-        Product(
-          name: 'Organic Spinach',
-          description: 'Fresh organic spinach leaves. Rich in iron and perfect for smoothies and salads.',
-          price: 2.99,
-          imageUrl: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3BpbmFjaHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-          createdAt: DateTime.now().subtract(Duration(days: 4)),
-        ),
-      ];
+  Future<void> _insertDummyData(Database db) async {
+    var count = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM products'));
+    if (count != null && count > 0) return;
 
-      for (var product in dummyProducts) {
-        await insertProduct(product);
-      }
+    List<Map<String, dynamic>> dummyProducts = [
+      {
+        'name': 'Organic Tomatoes',
+        'description': 'Fresh organic tomatoes grown without pesticides. Perfect for salads and cooking.',
+        'price': 3.99,
+        'imageUrl': 'https://images.unsplash.com/photo-1524593166156-312f362cada0?auto=format&fit=crop&w=500&q=60',
+        'createdAt': DateTime.now().subtract(Duration(days: 3)).toIso8601String(),
+      },
+      {
+        'name': 'Fresh Carrots Bundle',
+        'description': 'A bundle of fresh farm carrots. Rich in vitamins and perfect for juicing or cooking.',
+        'price': 2.49,
+        'imageUrl': 'https://images.unsplash.com/photo-1598170845058-32b9f8a4d5be?auto=format&fit=crop&w=500&q=60',
+        'createdAt': DateTime.now().subtract(Duration(days: 5)).toIso8601String(),
+      },
+      {
+        'name': 'Avocado Set',
+        'description': 'Premium avocados ready to eat. High in healthy fats and perfect for sandwiches and salads.',
+        'price': 5.99,
+        'imageUrl': 'https://images.unsplash.com/photo-1519162808019-7de1683fa2ad?auto=format&fit=crop&w=500&q=60',
+        'createdAt': DateTime.now().subtract(Duration(days: 2)).toIso8601String(),
+      },
+      {
+        'name': 'Farm Fresh Eggs',
+        'description': 'Free-range eggs from our local farm. Ethically sourced and perfect for breakfast.',
+        'price': 4.50,
+        'imageUrl': 'https://images.unsplash.com/photo-1506976785307-8732e854ad03?auto=format&fit=crop&w=500&q=60',
+        'createdAt': DateTime.now().subtract(Duration(days: 1)).toIso8601String(),
+      },
+      {
+        'name': 'Organic Spinach',
+        'description': 'Fresh organic spinach leaves. Rich in iron and perfect for smoothies and salads.',
+        'price': 2.99,
+        'imageUrl': 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=500&q=60',
+        'createdAt': DateTime.now().subtract(Duration(days: 4)).toIso8601String(),
+      },
+      {
+        'name': 'Sweet Potatoes',
+        'description': 'Delicious and nutritious sweet potatoes, perfect for baking, roasting, or mashing.',
+        'price': 3.25,
+        'imageUrl': 'https://images.unsplash.com/photo-1577389280673-1dffb1c6ee2f?auto=format&fit=crop&w=500&q=60',
+        'createdAt': DateTime.now().subtract(Duration(days: 6)).toIso8601String(),
+      },
+      {
+        'name': 'Fresh Strawberries',
+        'description': 'Sweet and juicy strawberries, perfect for snacking or adding to desserts.',
+        'price': 4.99,
+        'imageUrl': 'https://images.unsplash.com/photo-1556228722-0317997e9c8d?auto=format&fit=crop&w=500&q=60',
+        'createdAt': DateTime.now().subtract(Duration(days: 3)).toIso8601String(),
+      },
+      {
+        'name': 'Organic Apples',
+        'description': 'Crisp and delicious organic apples, perfect for snacking and baking.',
+        'price': 2.99,
+        'imageUrl': 'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=500&q=60',
+        'createdAt': DateTime.now().subtract(Duration(days: 8)).toIso8601String(),
+      },
+      {
+        'name': 'Fresh Blueberries',
+        'description': 'Plump and sweet blueberries, perfect for smoothies, baking, or snacking.',
+        'price': 5.99,
+        'imageUrl': 'https://images.unsplash.com/photo-1519183071298-a2962b2e8e04?auto=format&fit=crop&w=500&q=60',
+        'createdAt': DateTime.now().subtract(Duration(days: 4)).toIso8601String(),
+      },
+      {
+        'name': 'Organic Kale',
+        'description': 'Nutritious and versatile organic kale, perfect for salads, smoothies, and cooking.',
+        'price': 3.49,
+        'imageUrl': 'https://images.unsplash.com/photo-1582515073493-ffef4e9d1b4a?auto=format&fit=crop&w=500&q=60',
+        'createdAt': DateTime.now().subtract(Duration(days: 2)).toIso8601String(),
+      },
+    ];
+
+    for (var product in dummyProducts) {
+      await db.insert('products', product);
     }
   }
 
+  // CRUD operations
   Future<int> insertProduct(Product product) async {
     Database db = await database;
     return await db.insert('products', product.toMap());

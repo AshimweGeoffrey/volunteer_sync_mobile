@@ -24,6 +24,10 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
   final DatabaseHelper _databaseHelper = DatabaseHelper();
   final ImagePickerService _imagePickerService = ImagePickerService();
 
+  // Updated colors
+  final Color _primaryColor = Color(0xFF1E88E5);
+  final Color _accentColor = Color(0xFF26A69A);
+
   @override
   void initState() {
     super.initState();
@@ -134,13 +138,14 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(widget.product == null ? 'Add Product' : 'Edit Product'),
-        backgroundColor: Color(0xFF6200EE),
+        backgroundColor: _primaryColor,
+        elevation: 0,
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator(color: _primaryColor))
           : SingleChildScrollView(
               padding: EdgeInsets.all(20),
               child: Form(
@@ -158,11 +163,11 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                           width: 200,
                           height: 200,
                           decoration: BoxDecoration(
-                            color: Color(0xFF1E1E1E),
+                            color: Colors.grey[200],
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
                               color: _imageUrl.isEmpty 
-                                  ? Color(0xFF6200EE) 
+                                  ? _primaryColor 
                                   : Colors.transparent,
                               width: 2,
                             ),
@@ -173,14 +178,14 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                                   children: [
                                     Icon(
                                       Icons.camera_alt,
-                                      color: Color(0xFF6200EE),
+                                      color: _primaryColor,
                                       size: 48,
                                     ),
                                     SizedBox(height: 12),
                                     Text(
                                       'Add Photo',
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: Colors.black87,
                                         fontSize: 16,
                                       ),
                                     ),
@@ -192,10 +197,16 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                                       ? Image.network(
                                           _imageUrl,
                                           fit: BoxFit.cover,
+                                          errorBuilder: (context, error, stackTrace) => 
+                                              Icon(Icons.image_not_supported, 
+                                                  color: Colors.grey, size: 48),
                                         )
                                       : Image.file(
                                           File(_imageUrl),
                                           fit: BoxFit.cover,
+                                          errorBuilder: (context, error, stackTrace) => 
+                                              Icon(Icons.image_not_supported, 
+                                                  color: Colors.grey, size: 48),
                                         ),
                                 ),
                         ),
@@ -209,25 +220,25 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.black87,
                       ),
                     ),
                     SizedBox(height: 8),
                     TextFormField(
                       controller: _nameController,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black87),
                       decoration: InputDecoration(
                         hintText: 'Enter product name',
                         hintStyle: TextStyle(color: Colors.grey),
                         filled: true,
-                        fillColor: Color(0xFF1E1E1E),
+                        fillColor: Colors.grey[100],
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
+                          borderSide: BorderSide(color: Colors.grey[300]!),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Color(0xFF6200EE)),
+                          borderSide: BorderSide(color: _primaryColor),
                         ),
                       ),
                       validator: (value) {
@@ -245,25 +256,25 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.black87,
                       ),
                     ),
                     SizedBox(height: 8),
                     TextFormField(
                       controller: _descriptionController,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black87),
                       decoration: InputDecoration(
                         hintText: 'Enter product description',
                         hintStyle: TextStyle(color: Colors.grey),
                         filled: true,
-                        fillColor: Color(0xFF1E1E1E),
+                        fillColor: Colors.grey[100],
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
+                          borderSide: BorderSide(color: Colors.grey[300]!),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Color(0xFF6200EE)),
+                          borderSide: BorderSide(color: _primaryColor),
                         ),
                       ),
                       validator: (value) {
@@ -282,28 +293,28 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.black87,
                       ),
                     ),
                     SizedBox(height: 8),
                     TextFormField(
                       controller: _priceController,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black87),
                       decoration: InputDecoration(
                         hintText: 'Enter product price',
                         hintStyle: TextStyle(color: Colors.grey),
                         filled: true,
-                        fillColor: Color(0xFF1E1E1E),
+                        fillColor: Colors.grey[100],
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
+                          borderSide: BorderSide(color: Colors.grey[300]!),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Color(0xFF6200EE)),
+                          borderSide: BorderSide(color: _primaryColor),
                         ),
                         prefixText: '\$ ',
-                        prefixStyle: TextStyle(color: Colors.white),
+                        prefixStyle: TextStyle(color: Colors.black87),
                       ),
                       keyboardType: TextInputType.numberWithOptions(decimal: true),
                       validator: (value) {
@@ -329,7 +340,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                           style: TextStyle(fontSize: 16),
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF6200EE),
+                          backgroundColor: _primaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -346,7 +357,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
   void _showImagePickerOptions() {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Color(0xFF1E1E1E),
+      backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -361,7 +372,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Colors.black87,
                 ),
               ),
               SizedBox(height: 20),
@@ -407,12 +418,12 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              color: Color(0xFF2C2C2C),
+              color: Colors.grey[100],
               borderRadius: BorderRadius.circular(16),
             ),
             child: Icon(
               icon,
-              color: Color(0xFF6200EE),
+              color: _primaryColor,
               size: 36,
             ),
           ),
@@ -421,7 +432,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
             label,
             style: TextStyle(
               fontSize: 16,
-              color: Colors.white,
+              color: Colors.black87,
             ),
           ),
         ],
