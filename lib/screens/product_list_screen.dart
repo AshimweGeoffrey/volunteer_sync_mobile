@@ -7,7 +7,6 @@ import 'package:farmora/screens/product_form_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-
 class ProductListScreen extends StatefulWidget {
   @override
   _ProductListScreenState createState() => _ProductListScreenState();
@@ -70,15 +69,19 @@ class _ProductListScreenState extends State<ProductListScreen> with AutomaticKee
     });
     
     try {
+      // Modified to use compatible pagination parameters or none if not supported
       final products = await _databaseHelper.getProducts(
-        limit: _itemsPerPage,
-        offset: 0,
         category: _selectedCategory != 'All' ? _selectedCategory : null,
       );
       
+      // Apply pagination manually
+      final paginatedProducts = products.length > _itemsPerPage 
+          ? products.sublist(0, _itemsPerPage) 
+          : products;
+      
       setState(() {
-        _products = products;
-        _hasMoreItems = products.length == _itemsPerPage;
+        _products = paginatedProducts;
+        _hasMoreItems = products.length > _itemsPerPage;
         _isLoading = false;
       });
     } catch (e) {
@@ -98,18 +101,26 @@ class _ProductListScreenState extends State<ProductListScreen> with AutomaticKee
     
     try {
       final nextPage = _currentPage + 1;
-      final moreProducts = await _databaseHelper.getProducts(
-        limit: _itemsPerPage,
-        offset: nextPage * _itemsPerPage,
+      // Get all products and paginate manually
+      final allProducts = await _databaseHelper.getProducts(
         category: _selectedCategory != 'All' ? _selectedCategory : null,
       );
       
+      final startIndex = nextPage * _itemsPerPage;
+      final endIndex = startIndex + _itemsPerPage;
+      
       setState(() {
-        if (moreProducts.isNotEmpty) {
+        if (startIndex < allProducts.length) {
+          final moreProducts = allProducts.length > endIndex 
+              ? allProducts.sublist(startIndex, endIndex) 
+              : allProducts.sublist(startIndex);
+              
           _products.addAll(moreProducts);
           _currentPage = nextPage;
+          _hasMoreItems = endIndex < allProducts.length;
+        } else {
+          _hasMoreItems = false;
         }
-        _hasMoreItems = moreProducts.length == _itemsPerPage;
         _isLoading = false;
       });
     } catch (e) {
@@ -269,7 +280,7 @@ class _ProductListScreenState extends State<ProductListScreen> with AutomaticKee
             Navigator.push(
               context,
               MaterialPageRoute(
-builder: (context) => ProductDetailScreen(product: product),
+                builder: (context) => ProductDetailScreen(product: product),
               ),
             );
           },

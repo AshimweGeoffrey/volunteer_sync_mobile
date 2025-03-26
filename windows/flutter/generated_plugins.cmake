@@ -4,10 +4,8 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   battery_plus
-  cloud_firestore
   connectivity_plus
   file_selector_windows
-  firebase_core
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
