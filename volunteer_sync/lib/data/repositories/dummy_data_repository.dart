@@ -143,7 +143,7 @@ class DummyDataRepository {
     VolunteerEvent(
       id: '1',
       title: 'City Park Cleanup',
-      description: 'Join us for a day of cleaning up Central Park. We'll be collecting trash, weeding gardens, and planting new flowers to beautify our city's most beloved green space. All cleaning supplies will be provided, but please bring water and wear suitable clothing for outdoor work.',
+      description: 'Join us for a day of cleaning up Central Park. We\'ll be collecting trash, weeding gardens, and planting new flowers to beautify our city\'s most beloved green space. All cleaning supplies will be provided, but please bring water and wear suitable clothing for outdoor work.',
       date: DateTime(2025, 5, 15),
       startTime: const TimeOfDay(hour: 9, minute: 0),
       endTime: const TimeOfDay(hour: 12, minute: 0),
@@ -269,7 +269,7 @@ class DummyDataRepository {
     VolunteerEvent(
       id: '7',
       title: 'Beach Cleanup',
-      description: 'Join our effort to clean up the local beaches and protect marine wildlife. We'll be collecting trash, cataloging pollution sources, and documenting our impact to advocate for better environmental policies.',
+      description: 'Join our effort to clean up the local beaches and protect marine wildlife. We\'ll be collecting trash, cataloging pollution sources, and documenting our impact to advocate for better environmental policies.',
       date: DateTime(2025, 5, 29),
       startTime: const TimeOfDay(hour: 8, minute: 0),
       endTime: const TimeOfDay(hour: 12, minute: 0),
@@ -290,7 +290,7 @@ class DummyDataRepository {
     VolunteerEvent(
       id: '8',
       title: 'Community Garden Planting',
-      description: 'Help plant and maintain our community garden which provides fresh produce to local food banks. Tasks include planting, weeding, watering, and harvesting vegetables. No gardening experience necessary - we'll teach you everything you need to know!',
+      description: 'Help plant and maintain our community garden which provides fresh produce to local food banks. Tasks include planting, weeding, watering, and harvesting vegetables. No gardening experience necessary - we\'ll teach you everything you need to know!',
       date: DateTime(2025, 5, 16),
       startTime: const TimeOfDay(hour: 10, minute: 0),
       endTime: const TimeOfDay(hour: 13, minute: 0),

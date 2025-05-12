@@ -4,6 +4,7 @@ import '../../theme/app_theme.dart';
 import '../../data/repositories/dummy_data_repository.dart';
 import 'dart:async';
 import '../widgets/event_detail_bottom_sheet.dart';
+import 'package:volunteer_sync/data/models/event_category.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
