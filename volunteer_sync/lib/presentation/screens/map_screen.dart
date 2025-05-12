@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../theme/app_theme.dart';
-import '../../data/repositories/dummy_data_repository.dart';
-import 'dart:async';
-import '../widgets/event_detail_bottom_sheet.dart';
 import 'package:volunteer_sync/data/models/event_category.dart';
+import 'package:volunteer_sync/data/models/event.dart';
+import 'package:volunteer_sync/utils/app_theme.dart';
+// other imports
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);

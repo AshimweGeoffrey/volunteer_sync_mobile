@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../data/models/event.dart';
-import '../../theme/app_theme.dart';
+import 'package:volunteer_sync/data/models/event_category.dart';
+import 'package:volunteer_sync/data/models/event.dart';
+import 'package:volunteer_sync/utils/app_theme.dart';
+// other imports
 
 class EventDetailBottomSheet extends StatefulWidget {
   final VolunteerEvent event;

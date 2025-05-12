@@ -1,4 +1,7 @@
-// Update the constructor to ensure it accepts all the required parameters
+import 'package:flutter/material.dart';
+import 'package:volunteer_sync/data/models/event_category.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 class VolunteerEvent {
   final String id;
   final String title;
@@ -16,6 +19,20 @@ class VolunteerEvent {
   final EventCategory category;
   final List<String> skills;
   final String imageUrl;
+  final bool isVirtual;
+  final List<String> attendees;
+  final int impactPoints;
+
+  // Computed properties
+  LatLng get coordinates => LatLng(latitude, longitude);
+  int get spotsAvailable => availableSpots - registeredVolunteers;
+  int get spotsTotal => availableSpots;
+  String get formattedDate => "${date.day}/${date.month}/${date.year}";
+  String get formattedTime => "${formatTimeOfDay(startTime)} - ${formatTimeOfDay(endTime)}";
+  double get distanceFromUser => 2.5; // Mock value, replace with actual distance calculation
+
+  // Getters for necessary UI elements
+  List<String> get requiredSkills => skills;
 
   VolunteerEvent({
     required this.id,
@@ -34,9 +51,11 @@ class VolunteerEvent {
     required this.category,
     this.skills = const [],
     this.imageUrl = '',
+    this.isVirtual = false,
+    this.attendees = const [],
+    this.impactPoints = 0,
   });
 
-  // Rest of the class methods...
   String formatTimeOfDay(TimeOfDay timeOfDay) {
     final hour = timeOfDay.hourOfPeriod == 0 ? 12 : timeOfDay.hourOfPeriod;
     final minute = timeOfDay.minute.toString().padLeft(2, '0');
